@@ -1,8 +1,11 @@
+// 参考
+// http://www.cnblogs.com/hustskyking/p/principle-of-javascript-template.html
+// https://github.com/aui/artTemplate
+
 const template = function(selector, data) {
 	const element = document.querySelector(selector),
 		compile = (tpl, data) => {
 			const reg = new RegExp(`${template.config.openTag}([^${template.config.closeTag}]+)?${template.config.closeTag}`, "g")
-			//regOut = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g,
 			const nameArray = []
 
 			let code = "let result = [];\n\n",
