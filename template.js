@@ -61,7 +61,7 @@ const template = function(selector, data) {
 					return
 				}
 
-				if (/^if/.test(expression)) {
+				if (/^if|^elseif/.test(expression)) {
 					const [, name] = expression.split(" ")
 
 					if (! nameArray.includes(name)) {
@@ -78,7 +78,15 @@ const template = function(selector, data) {
 						nameArray.push(name)
 					}
 
-					code += `\nif (${expression.split(" ")[1]}) {\n`
+					const keyword = /^else/.test(expression) ? "} else if " : "if"
+
+					code += `\n${keyword} (${expression.split(" ")[1]}) {\n`
+
+					return
+				}
+
+				if (/^else$/.test(expression)) {
+					code += "} else {\n\n"
 
 					return
 				}
